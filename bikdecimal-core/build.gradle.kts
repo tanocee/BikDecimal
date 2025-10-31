@@ -1,3 +1,5 @@
+import cl.franciscosolis.sonatypecentralupload.SonatypeCentralUploadTask
+
 plugins {
   alias(libs.plugins.kotlinMultiplatform)
   alias(libs.plugins.androidKotlinMultiplatformLibrary)
@@ -155,6 +157,27 @@ publishing {
   }
 }
 
-sonatypeCentralUpload {
+tasks.named<SonatypeCentralUploadTask>("sonatypeCentralUpload") {
+  // 公開するファイルを生成するタスクに依存する。
+  dependsOn("jar", "sourcesJar", "javadocJar", "generatePomFileForMavenPublication")
 
+  // Central Portalで生成したトークンを指定する。
+  username = System.getenv("SONATYPE_CENTRAL_USERNAME")
+  password = System.getenv("SONATYPE_CENTRAL_PASSWORD")
+
+  // タスク名から成果物を取得する。
+  archives = files(
+    tasks.named("jar"),
+    tasks.named("sourcesJar"),
+    tasks.named("javadocJar"),
+  )
+  // POMファイルをタスクの成果物から取得する。
+  pom = file(
+    tasks.named("generatePomFileForMavenPublication").get().outputs.files.single()
+  )
+
+  // PGPの秘密鍵を指定する。
+  signingKey = System.getenv("PGP_SIGNING_KEY")
+  // PGPの秘密鍵のパスフレーズを指定する。
+  signingKeyPassphrase = System.getenv("PGP_SIGNING_KEY_PASSPHRASE")
 }
