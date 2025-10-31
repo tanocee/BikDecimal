@@ -3,6 +3,7 @@ plugins {
   alias(libs.plugins.androidKotlinMultiplatformLibrary)
   alias(libs.plugins.androidLint)
   alias(libs.plugins.mavenPublish)
+  alias(libs.plugins.sonatypeUpload)
 }
 
 kotlin {
@@ -115,6 +116,36 @@ publishing {
     }
   }
   publications {
+    register<MavenPublication>("maven") {
+      pom {
+        name.set(project.name)
+        // Short description
+        description.set("Kotlin Multiplatform library for high-precision decimal operations")
+        // Project URL (GitHub repository)
+        url.set("https://github.com/tanocee/BikDecimal")
+        // Licenses
+        licenses {
+          license {
+            name.set("MIT License")
+            url.set("https://github.com/tanocee/BikDecimal/blob/main/LICENSE")
+            distribution.set("repo")
+          }
+        }
+        // Developers
+        developers {
+          developer {
+            id.set("tanocee")
+            name.set("tanocee")
+            email.set("tanocee@users.noreply.github.com")
+          }
+        }
+        // SCM
+        scm {
+          url.set("https://github.com/tanocee/BikDecimal")
+        }
+      }
+    }
+
     register<MavenPublication>("gpr") {
       from(components["kotlin"])
       groupId = project.group.toString()
@@ -122,4 +153,8 @@ publishing {
       version = project.version.toString()
     }
   }
+}
+
+sonatypeCentralUpload {
+
 }
