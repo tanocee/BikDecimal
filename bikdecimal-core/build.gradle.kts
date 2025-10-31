@@ -11,7 +11,7 @@ kotlin {
   // which platforms this KMP module supports.
   // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
   androidLibrary {
-    namespace = "jp.co.tanocee.bikdecimal-core"
+    namespace = "jp.co.tanocee.bikdecimal"
     compileSdk = 36
     minSdk = 24
 
@@ -101,7 +101,7 @@ kotlin {
 
 group = "jp.co.tanocee"
 
-version = "1.0.0"
+version = "0.0.1"
 
 publishing {
   repositories {
