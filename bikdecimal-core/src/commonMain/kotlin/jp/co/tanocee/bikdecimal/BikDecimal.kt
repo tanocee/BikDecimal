@@ -61,7 +61,7 @@ expect class BikDecimal {
 /**
  * Converts the string to a BikDecimal. If the conversion fails, returns the default value.
  */
-fun String.toKMPBigDecimal(default: BikDecimal = BikDecimal.ZERO): BikDecimal {
+fun String.toBikDecimal(default: BikDecimal = BikDecimal.ZERO): BikDecimal {
   return runCatching {
     BikDecimal(this)
   }.getOrElse {

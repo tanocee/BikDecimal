@@ -1,4 +1,4 @@
-//rootProject.name = "BikDecimal"
+rootProject.name = "BikDecimal"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
