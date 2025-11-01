@@ -160,4 +160,4 @@ To build the entire project including the sample app:
 
 ## License
 
-[Add your license information here]
+[LICENSE](./LICENSE)
