@@ -7,6 +7,7 @@ plugins {
   alias(libs.plugins.mavenPublish)
   alias(libs.plugins.sonatypeUpload)
   alias(libs.plugins.gradleMavenPublish)
+  alias(libs.plugins.signing)
 }
 
 kotlin {
@@ -167,47 +168,7 @@ publishing {
   }
 }
 
-//tasks.named<SonatypeCentralUploadTask>("sonatypeCentralUpload") {
-//  // Central Portalで生成したトークンを指定する。
-//  username = project.findProperty("sonatype.username")?.toString()
-//    ?: System.getenv("SONATYPE_CENTRAL_USERNAME")
-//  password = project.findProperty("sonatype.password")?.toString()
-//    ?: System.getenv("SONATYPE_CENTRAL_PASSWORD")
-//
-//  // タスク名から成果物を取得する。
-//  archives = files(
-//    tasks.named("jar"),
-//    tasks.named("sourcesJar"),
-//    tasks.named("javadocJar"),
-//  )
-//  // POMファイルをタスクの成果物から取得する。
-//  pom = file(
-//    tasks.named("generatePomFileForMavenPublication").get().outputs.files.single()
-//  )
-//
-//  // PGPの秘密鍵を指定する。
-//  signingKey = project.findProperty("pgp.key")?.toString() ?: System.getenv("PGP_SIGNING_KEY")
-//  // PGPの秘密鍵のパスフレーズを指定する。
-//  signingKeyPassphrase = project.findProperty("pgp.passphrase")?.toString()
-//    ?: System.getenv("PGP_SIGNING_KEY_PASSPHRASE")
-//}
-
-//tasks.sonatypeCentralUpload {
-//  val localProperties = Properties()
-//  localProperties.load(rootProject.file("local.properties").inputStream())
-//
-//  // Central Portalで生成したトークンを指定する。
-//  username =
-//    localProperties["sonatype.username"]?.toString() ?: System.getenv("SONATYPE_CENTRAL_USERNAME")
-//  password =
-//    localProperties["sonatype.password"]?.toString() ?: System.getenv("SONATYPE_CENTRAL_PASSWORD")
-//
-//  // PGPの秘密鍵を指定する。
-//  signingKey = localProperties["pgp.key"]?.toString() ?: System.getenv("PGP_SIGNING_KEY")
-//  // PGPの秘密鍵のパスフレーズを指定する。
-//  signingKeyPassphrase =
-//    localProperties["pgp.passphrase"]?.toString() ?: System.getenv("PGP_SIGNING_KEY_PASSPHRASE")
-//
-//  archives = project.layout.buildDirectory.dir("libs").get().asFileTree
-//  pom
-//}
+signing {
+  useGpgCmd()
+  sign(publishing.publications)
+}
