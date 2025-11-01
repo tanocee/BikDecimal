@@ -22,7 +22,7 @@ Add the dependency to your `commonMain` source set:
 kotlin {
   sourceSets {
     commonMain.dependencies {
-      implementation("jp.co.tanocee:bikdecimal-core:1.0.0")
+      implementation("jp.co.tanocee:bikdecimal:1.0.0")
     }
   }
 }
