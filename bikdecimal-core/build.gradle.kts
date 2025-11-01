@@ -1,4 +1,4 @@
-import cl.franciscosolis.sonatypecentralupload.SonatypeCentralUploadTask
+import cl.franciscosolis.sonatypecentralupload.utils.signFile
 
 plugins {
   alias(libs.plugins.kotlinMultiplatform)
@@ -6,6 +6,7 @@ plugins {
   alias(libs.plugins.androidLint)
   alias(libs.plugins.mavenPublish)
   alias(libs.plugins.sonatypeUpload)
+  alias(libs.plugins.gradleMavenPublish)
 }
 
 kotlin {
@@ -103,8 +104,47 @@ kotlin {
 }
 
 group = "jp.co.tanocee"
+val artifactId = "bikdecimal"
+version = "1.0.0-SNAPSHOT"
 
-version = "1.0.0"
+mavenPublishing {
+  publishToMavenCentral()
+  signAllPublications()
+
+  coordinates(
+    groupId = project.group.toString(),
+    artifactId = artifactId,
+    version = project.version.toString()
+  )
+
+  pom {
+    name.set(project.name)
+    // Short description
+    description.set("Kotlin Multiplatform library for high-precision decimal operations")
+    // Project URL (GitHub repository)
+    url.set("https://github.com/tanocee/BikDecimal")
+    // Licenses
+    licenses {
+      license {
+        name.set("MIT License")
+        url.set("https://github.com/tanocee/BikDecimal/blob/main/LICENSE")
+        distribution.set("repo")
+      }
+    }
+    // Developers
+    developers {
+      developer {
+        id.set("tanocee")
+        name.set("tanocee")
+        email.set("support@tanocee.co.jp")
+      }
+    }
+    // SCM
+    scm {
+      url.set("https://github.com/tanocee/BikDecimal")
+    }
+  }
+}
 
 publishing {
   repositories {
@@ -118,66 +158,56 @@ publishing {
     }
   }
   publications {
-    register<MavenPublication>("maven") {
-      pom {
-        name.set(project.name)
-        // Short description
-        description.set("Kotlin Multiplatform library for high-precision decimal operations")
-        // Project URL (GitHub repository)
-        url.set("https://github.com/tanocee/BikDecimal")
-        // Licenses
-        licenses {
-          license {
-            name.set("MIT License")
-            url.set("https://github.com/tanocee/BikDecimal/blob/main/LICENSE")
-            distribution.set("repo")
-          }
-        }
-        // Developers
-        developers {
-          developer {
-            id.set("tanocee")
-            name.set("tanocee")
-            email.set("tanocee@users.noreply.github.com")
-          }
-        }
-        // SCM
-        scm {
-          url.set("https://github.com/tanocee/BikDecimal")
-        }
-      }
-    }
-
     register<MavenPublication>("gpr") {
       from(components["kotlin"])
       groupId = project.group.toString()
-      artifactId = "bikdecimal"
+      artifactId = artifactId
       version = project.version.toString()
     }
   }
 }
 
-tasks.named<SonatypeCentralUploadTask>("sonatypeCentralUpload") {
-  // 公開するファイルを生成するタスクに依存する。
-  dependsOn("jar", "sourcesJar", "javadocJar", "generatePomFileForMavenPublication")
+//tasks.named<SonatypeCentralUploadTask>("sonatypeCentralUpload") {
+//  // Central Portalで生成したトークンを指定する。
+//  username = project.findProperty("sonatype.username")?.toString()
+//    ?: System.getenv("SONATYPE_CENTRAL_USERNAME")
+//  password = project.findProperty("sonatype.password")?.toString()
+//    ?: System.getenv("SONATYPE_CENTRAL_PASSWORD")
+//
+//  // タスク名から成果物を取得する。
+//  archives = files(
+//    tasks.named("jar"),
+//    tasks.named("sourcesJar"),
+//    tasks.named("javadocJar"),
+//  )
+//  // POMファイルをタスクの成果物から取得する。
+//  pom = file(
+//    tasks.named("generatePomFileForMavenPublication").get().outputs.files.single()
+//  )
+//
+//  // PGPの秘密鍵を指定する。
+//  signingKey = project.findProperty("pgp.key")?.toString() ?: System.getenv("PGP_SIGNING_KEY")
+//  // PGPの秘密鍵のパスフレーズを指定する。
+//  signingKeyPassphrase = project.findProperty("pgp.passphrase")?.toString()
+//    ?: System.getenv("PGP_SIGNING_KEY_PASSPHRASE")
+//}
 
-  // Central Portalで生成したトークンを指定する。
-  username = System.getenv("SONATYPE_CENTRAL_USERNAME")
-  password = System.getenv("SONATYPE_CENTRAL_PASSWORD")
-
-  // タスク名から成果物を取得する。
-  archives = files(
-    tasks.named("jar"),
-    tasks.named("sourcesJar"),
-    tasks.named("javadocJar"),
-  )
-  // POMファイルをタスクの成果物から取得する。
-  pom = file(
-    tasks.named("generatePomFileForMavenPublication").get().outputs.files.single()
-  )
-
-  // PGPの秘密鍵を指定する。
-  signingKey = System.getenv("PGP_SIGNING_KEY")
-  // PGPの秘密鍵のパスフレーズを指定する。
-  signingKeyPassphrase = System.getenv("PGP_SIGNING_KEY_PASSPHRASE")
-}
+//tasks.sonatypeCentralUpload {
+//  val localProperties = Properties()
+//  localProperties.load(rootProject.file("local.properties").inputStream())
+//
+//  // Central Portalで生成したトークンを指定する。
+//  username =
+//    localProperties["sonatype.username"]?.toString() ?: System.getenv("SONATYPE_CENTRAL_USERNAME")
+//  password =
+//    localProperties["sonatype.password"]?.toString() ?: System.getenv("SONATYPE_CENTRAL_PASSWORD")
+//
+//  // PGPの秘密鍵を指定する。
+//  signingKey = localProperties["pgp.key"]?.toString() ?: System.getenv("PGP_SIGNING_KEY")
+//  // PGPの秘密鍵のパスフレーズを指定する。
+//  signingKeyPassphrase =
+//    localProperties["pgp.passphrase"]?.toString() ?: System.getenv("PGP_SIGNING_KEY_PASSPHRASE")
+//
+//  archives = project.layout.buildDirectory.dir("libs").get().asFileTree
+//  pom
+//}

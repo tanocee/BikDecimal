@@ -16,6 +16,7 @@ kotlinStdlib = "2.2.20"
 runner = "1.5.2"
 core = "1.5.0"
 sonatypeUpload = "1.0.3"
+gradleMavenPublish = "0.34.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -42,3 +43,4 @@ androidKotlinMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.lib
 androidLint = { id = "com.android.lint", version.ref = "agp" }
 mavenPublish = { id = "maven-publish" }
 sonatypeUpload = { id = "cl.franciscosolis.sonatype-central-upload", version.ref = "sonatypeUpload" }
+gradleMavenPublish = { id = "com.vanniktech.maven.publish", version.ref = "gradleMavenPublish" }
