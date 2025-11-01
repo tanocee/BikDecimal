@@ -43,5 +43,4 @@ androidKotlinMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.lib
 androidLint = { id = "com.android.lint", version.ref = "agp" }
 mavenPublish = { id = "maven-publish" }
 signing = { id = "signing" }
-sonatypeUpload = { id = "cl.franciscosolis.sonatype-central-upload", version.ref = "sonatypeUpload" }
 gradleMavenPublish = { id = "com.vanniktech.maven.publish", version.ref = "gradleMavenPublish" }

@@ -1,11 +1,8 @@
-import cl.franciscosolis.sonatypecentralupload.utils.signFile
-
 plugins {
   alias(libs.plugins.kotlinMultiplatform)
   alias(libs.plugins.androidKotlinMultiplatformLibrary)
   alias(libs.plugins.androidLint)
   alias(libs.plugins.mavenPublish)
-  alias(libs.plugins.sonatypeUpload)
   alias(libs.plugins.gradleMavenPublish)
   alias(libs.plugins.signing)
 }
