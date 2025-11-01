@@ -19,7 +19,7 @@ kotlin {
     iosSimulatorArm64()
   ).forEach { iosTarget ->
     iosTarget.binaries.framework {
-      baseName = "ComposeApp"
+      baseName = "SampleApp"
       isStatic = true
     }
   }
@@ -30,6 +30,8 @@ kotlin {
       implementation(libs.androidx.activity.compose)
     }
     commonMain.dependencies {
+      implementation(project(":bikdecimal-core"))
+
       implementation(compose.runtime)
       implementation(compose.foundation)
       implementation(compose.material3)
