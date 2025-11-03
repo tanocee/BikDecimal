@@ -30,7 +30,7 @@ kotlin {
       implementation(libs.androidx.activity.compose)
     }
     commonMain.dependencies {
-      implementation(project(":bikdecimal-core"))
+      implementation(libs.bikdecimal)
 
       implementation(compose.runtime)
       implementation(compose.foundation)

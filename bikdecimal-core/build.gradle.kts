@@ -14,8 +14,8 @@ kotlin {
   // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
   androidLibrary {
     namespace = "jp.co.tanocee.bikdecimal"
-    compileSdk = 36
-    minSdk = 24
+    compileSdk = libs.versions.android.compileSdk.get().toInt()
+    minSdk = libs.versions.android.minSdk.get().toInt()
 
     withHostTestBuilder {
     }
@@ -103,7 +103,7 @@ kotlin {
 
 group = "jp.co.tanocee"
 val artifactId = "bikdecimal"
-version = "1.0.0"
+version = libs.versions.version.release
 
 mavenPublishing {
   publishToMavenCentral()
