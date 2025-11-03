@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import jp.co.tanocee.bikdecimal.BikDecimal
+import jp.co.tanocee.bikdecimal.sumOf
 import jp.co.tanocee.bikdecimal.toBikDecimal
 import org.jetbrains.compose.ui.tooling.preview.Preview
 

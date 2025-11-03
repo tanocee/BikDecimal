@@ -3,6 +3,8 @@ agp = "8.11.2"
 android-compileSdk = "36"
 android-minSdk = "24"
 android-targetSdk = "36"
+version-sample = "1.0.0"
+version-release = "1.0.0"
 androidx-activity = "1.11.0"
 androidx-appcompat = "1.7.1"
 androidx-core = "1.17.0"
@@ -32,6 +34,7 @@ androidx-lifecycle-runtimeCompose = { module = "org.jetbrains.androidx.lifecycle
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlinStdlib" }
 androidx-runner = { group = "androidx.test", name = "runner", version.ref = "runner" }
 androidx-core = { group = "androidx.test", name = "core", version.ref = "core" }
+bikdecimal = { group = "jp.co.tanocee", name = "bikdecimal", version.ref = "version-sample" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
