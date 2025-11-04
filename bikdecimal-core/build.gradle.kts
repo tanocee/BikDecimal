@@ -103,11 +103,17 @@ kotlin {
 
 group = "jp.co.tanocee"
 val artifactId = "bikdecimal"
-version = libs.versions.version.release
+version = libs.versions.version.release.get()
 
 mavenPublishing {
   publishToMavenCentral()
-  signAllPublications()
+
+  // Only sign when GPG is available (usually in CI/CD)
+  if (System.getenv("GPG_PRIVATE_KEY") != null ||
+    project.hasProperty("pgp.key")
+  ) {
+    signAllPublications()
+  }
 
   coordinates(
     groupId = project.group.toString(),
@@ -155,17 +161,14 @@ publishing {
       }
     }
   }
-  publications {
-    register<MavenPublication>("gpr") {
-      from(components["kotlin"])
-      groupId = project.group.toString()
-      artifactId = artifactId
-      version = project.version.toString()
-    }
-  }
 }
 
-signing {
-  useGpgCmd()
-  sign(publishing.publications)
+// Only configure signing when GPG is available (usually in CI/CD)
+if (System.getenv("GPG_PRIVATE_KEY") != null ||
+  project.hasProperty("pgp.key")
+) {
+  signing {
+    useGpgCmd()
+    sign(publishing.publications)
+  }
 }
