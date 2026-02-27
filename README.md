@@ -1,10 +1,10 @@
 # BikDecimal
 
-A Kotlin Multiplatform library providing arbitrary-precision decimal arithmetic across Android and iOS platforms.
+A Kotlin Multiplatform library providing arbitrary-precision decimal arithmetic across Android, iOS, and JVM platforms.
 
 ## Features
 
-- **Multiplatform Support**: Works seamlessly on Android and iOS
+- **Multiplatform Support**: Works seamlessly on Android, iOS, and JVM
 - **Arbitrary Precision**: Handle decimal numbers with high precision without floating-point errors
 - **Easy to Use**: Kotlin operator overloading for natural arithmetic operations
 - **Type Safe**: Strongly typed decimal numbers with platform-native implementations
@@ -12,6 +12,7 @@ A Kotlin Multiplatform library providing arbitrary-precision decimal arithmetic 
 ## Supported Platforms
 
 - Android (using `java.math.BigDecimal`)
+- JVM (using `java.math.BigDecimal`)
 - iOS (using `NSDecimalNumber`)
 
 ## Installation
@@ -141,6 +142,7 @@ Open the project in Xcode and run the `sample` target.
 - [bikdecimal-core](./bikdecimal-core) - The core library with multiplatform implementation
   - `commonMain` - Common API and extension functions
   - `androidMain` - Android implementation using `java.math.BigDecimal`
+  - `jvmMain` - JVM implementation using `java.math.BigDecimal`
   - `iosMain` - iOS implementation using `NSDecimalNumber`
 - [sample](./sample) - Sample application demonstrating library usage
 
