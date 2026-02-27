@@ -12,6 +12,7 @@ kotlin {
   // Target declarations - add or remove as needed below. These define
   // which platforms this KMP module supports.
   // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
+  jvm()
   androidLibrary {
     namespace = "jp.co.tanocee.bikdecimal"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
@@ -96,6 +97,12 @@ kotlin {
         // part of KMP’s default source set hierarchy. Note that this source set depends
         // on common by default and will correctly pull the iOS artifacts of any
         // KMP dependencies declared in commonMain.
+      }
+    }
+
+    jvmTest {
+      dependencies {
+        implementation(libs.kotlin.test)
       }
     }
   }
