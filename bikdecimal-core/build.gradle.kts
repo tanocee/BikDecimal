@@ -13,6 +13,10 @@ kotlin {
   // which platforms this KMP module supports.
   // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
   jvm()
+  js(IR) {
+    browser()
+    nodejs()
+  }
   androidLibrary {
     namespace = "jp.co.tanocee.bikdecimal"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
@@ -101,6 +105,12 @@ kotlin {
     }
 
     jvmTest {
+      dependencies {
+        implementation(libs.kotlin.test)
+      }
+    }
+
+    jsTest {
       dependencies {
         implementation(libs.kotlin.test)
       }
