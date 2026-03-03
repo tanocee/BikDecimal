@@ -1,5 +1,6 @@
 package jp.co.tanocee.bikdecimal
 
+import kotlinx.serialization.Serializable
 import java.math.BigDecimal
 import java.math.RoundingMode as JavaRoundingMode
 
@@ -19,6 +20,7 @@ internal fun RoundingMode.toJavaRoundingMode(): JavaRoundingMode = when (this) {
   RoundingMode.UNNECESSARY -> JavaRoundingMode.UNNECESSARY
 }
 
+@Serializable(with = BikDecimalSerializer::class)
 actual class BikDecimal {
   private val value: BigDecimal
 

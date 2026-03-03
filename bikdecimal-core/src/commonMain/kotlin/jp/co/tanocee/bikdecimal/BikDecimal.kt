@@ -1,5 +1,7 @@
 package jp.co.tanocee.bikdecimal
 
+import kotlinx.serialization.Serializable
+
 /**
  * The native BigDecimal representation for the current platform.
  */
@@ -60,6 +62,7 @@ enum class RoundingMode {
 /**
  * A multiplatform arbitrary-precision decimal type.
  */
+@Serializable(with = BikDecimalSerializer::class)
 expect class BikDecimal {
   constructor(value: String)
   constructor(value: Double)
