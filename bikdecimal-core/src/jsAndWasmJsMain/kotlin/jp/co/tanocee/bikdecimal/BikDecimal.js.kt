@@ -1,7 +1,10 @@
 package jp.co.tanocee.bikdecimal
 
+import kotlinx.serialization.Serializable
+
 actual typealias NativeBigDecimal = JsBigDecimal
 
+@Serializable(with = BikDecimalSerializer::class)
 actual class BikDecimal {
     private val value: JsBigDecimal
 

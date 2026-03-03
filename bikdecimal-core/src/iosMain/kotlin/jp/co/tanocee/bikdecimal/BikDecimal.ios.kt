@@ -1,5 +1,6 @@
 package jp.co.tanocee.bikdecimal
 
+import kotlinx.serialization.Serializable
 import platform.Foundation.NSDecimalNumber
 import platform.Foundation.NSDecimalNumberHandler
 import platform.Foundation.NSRoundingMode
@@ -22,6 +23,7 @@ internal fun RoundingMode.toNSRoundingModeValue(): NSRoundingMode = when (this) 
   RoundingMode.UNNECESSARY -> NSRoundingMode.NSRoundPlain
 }
 
+@Serializable(with = BikDecimalSerializer::class)
 actual class BikDecimal {
   private val value: NSDecimalNumber
 
